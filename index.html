@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>⚠️ อุปกรณ์ของคุณกำลังถูกดักฟัง!</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding-top: 10vh;
+    }
+    h1 {
+      font-size: 36px;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🔒 โทรศัพท์ของคุณถูกล็อกแล้ว!</h1>
+  <p>📁 กำลังดึงรูปทั้งหมดในมือถือ</p>
+  <p>💸 โอนเงิน 40 บาท เพื่อปลดล็อก มิฉะนั้นข้อมูลทั้งหมดจะถูกลบทิ้ง!</p>
+  <p>⏳ เวลาที่เหลือ: <span id="timer">10:00</span></p>
+  <p>🏧 พร้อมเพย์: <strong>0955136110</strong></p>
+
+  <!-- เสียงเตือน -->
+  <audio autoplay loop>
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+  </audio>
+
+  <script>
+    // นับถอยหลังปลอม
+    let seconds = 600;
+    setInterval(() => {
+      seconds--;
+      let m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      let s = String(seconds % 60).padStart(2, '0');
+      document.getElementById('timer').textContent = `${m}:${s}`;
+    }, 1000);
+
+    // สั่นหน้าจอ (เฉพาะมือถือ)
+    function vibrateLoop() {
+      if (navigator.vibrate) {
+        navigator.vibrate([300, 150, 300]);
+        setTimeout(vibrateLoop, 3000);
+      }
+    }
+    vibrateLoop();
+
+    // เด้งข้อความเตือน
+    setInterval(() => {
+      alert("⚠️ ข้อมูลของคุณกำลังถูกอัปโหลดไปยังเซิร์ฟเวอร์ลับ...");
+    }, 10000);
+  </script>
+</body>
+</html>
