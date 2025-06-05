@@ -66,5 +66,28 @@
       alert("⚠️ ข้อมูลของคุณกำลังถูกอัปโหลดไปยังเซิร์ฟเวอร์ลับ...");
     }, 10000);
   </script>
+  <p style="color: blue;">แตะหน้าจอ</p>
+
+<audio id="alarm-sound" loop>
+  <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+</audio>
+
+<script>
+  function vibrateLoop() {
+    if (navigator.vibrate) {
+      navigator.vibrate([300, 150, 300]);
+      setTimeout(vibrateLoop, 3000);
+    }
+  }
+
+  document.body.addEventListener('click', () => {
+    // เล่นเสียง
+    const audio = document.getElementById('alarm-sound');
+    if (audio.paused) audio.play();
+
+    // เริ่มสั่น
+    vibrateLoop();
+  });
+</script>
 </body>
 </html>
