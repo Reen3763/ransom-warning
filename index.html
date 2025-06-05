@@ -29,9 +29,18 @@
   <p>🏧 พร้อมเพย์: <strong>0955136110</strong></p>
 
   <!-- เสียงเตือน -->
-  <audio autoplay loop>
-    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
-  </audio>
+  <audio id="alarm-sound" autoplay loop>
+  <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+</audio>
+
+<script>
+  document.body.addEventListener('click', () => {
+    const audio = document.getElementById('alarm-sound');
+    if (audio.paused) {
+      audio.play();
+    }
+  });
+</script>
 
   <script>
     // นับถอยหลังปลอม
